@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div style='margin-top: 100px;'  ></div>
+<form action="{% url 'signup' %}" method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">send</button>
+    {{form.errors}}
+</form>
+
+{% endblock content %}
