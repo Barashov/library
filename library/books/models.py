@@ -1,6 +1,6 @@
 from django.db import models
 from django.urls import reverse
-
+from accounts.models import User
 # Create your models here.
 
 
@@ -23,7 +23,7 @@ class Books(models.Model):
     photo = models.ImageField('фотография', upload_to='photo/')
     description = models.TextField('описание', blank=True, null=True)
     category = models.ForeignKey(Categories, on_delete=models.CASCADE)
-    
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     class Meta:
         verbose_name = 'книга'
         verbose_name_plural = 'книги'
@@ -31,5 +31,7 @@ class Books(models.Model):
         return reverse("book", kwargs={"pk": self.pk})
     def __str__(self):
         return self.name
+    
+    
     
         
