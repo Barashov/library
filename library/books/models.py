@@ -16,7 +16,7 @@ class Categories(models.Model):
     def __str__(self):
         return self.name
 
-class Books(models.Model):
+class Book(models.Model):
     name = models.CharField('название',max_length=30)
     author = models.CharField('автор',max_length=30)
     file = models.FileField('файл книги', upload_to='file/')
@@ -24,6 +24,7 @@ class Books(models.Model):
     description = models.TextField('описание', blank=True, null=True)
     category = models.ForeignKey(Categories, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    users = models.ManyToManyField(User, related_name='books')
     class Meta:
         verbose_name = 'книга'
         verbose_name_plural = 'книги'

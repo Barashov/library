@@ -1,9 +1,11 @@
 from django import forms
 
-from .models import Books
+from .models import Book
+
+
 class BookCreateForm(forms.ModelForm):
     class Meta:
-        model = Books
+        model = Book
         fields = ('name', 'author', 'description', 'category', 'file', 'photo')
     name = forms.CharField()
     author = forms.CharField()

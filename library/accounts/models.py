@@ -1,5 +1,4 @@
 from django.db import models
-from books.models import Books
 from django.contrib.auth.models import AbstractUser
 # Create your models here.
 class User(AbstractUser):
@@ -9,7 +8,7 @@ class User(AbstractUser):
     birthday = models.DateField(blank=True, null=True)
     reqistration_date = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=30)
-    books = models.ManyToManyField(Books)
+    
     
     
 
