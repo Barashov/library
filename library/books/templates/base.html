@@ -20,13 +20,14 @@
           <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Онлайн библиотека</h5>
           <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
+        <hr>
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Главная</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">все книги</a>
+              <a class="nav-link" href="{% url 'books' %}">все книги</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">новинки</a>
@@ -35,7 +36,7 @@
               <a class="nav-link" href="#">категории</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">мои книги</a>
+              <a class="nav-link" href="{% url 'userbooks' %}">мои книги</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'bookcreate' %}">добавить книгу</a>
@@ -49,6 +50,9 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">профиль</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'logout' %}">выйти</a>
             </li>
             <hr>
             

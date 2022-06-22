@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+
+{% for book in books %}
+{{book.file}}
+<a href="/media/{{book.file}}">book</a>
+{% if not_my_books %}
+<button type="button" class="btn btn-outline-secondary" onclick="document.location.href='{% url 'addbook' book.pk%}'">Добавить в мои книги</button>
+{% endif %}
+{{book.name}}
+<br>
+{% endfor %}
+
+
+{% endblock content %}
