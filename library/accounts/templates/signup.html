@@ -1,11 +1,18 @@
 {% extends 'base.html' %}
 
-
 {% block content %}
 <div style='margin-top: 100px;'  ></div>
 <form action="{% url 'signup' %}" method="post">
     {% csrf_token %}
-    {{form.as_p}}
+    <div class="container bg-secondary" style='max-width: 500px;'>
+        {% for field in form %}
+        <div style='height: 10px;'></div>
+        {{field}}
+        <br>
+        
+        {% endfor %}
+    </div>
+
     <button type="submit">send</button>
     {{form.errors}}
 </form>
