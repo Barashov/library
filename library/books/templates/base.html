@@ -12,7 +12,7 @@
     {% block head %}{% endblock head %}
 </head>
 <body>
-  <nav class="navbar navbar-light bg-light fixed-top">
+  <nav class="navbar navbar-light fixed-top" style='background-color: #fecba1'>
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Library</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
@@ -45,18 +45,23 @@
               <a class="nav-link" href="{% url 'bookcreate' %}">добавить книгу</a>
             </li>
             <hr>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'signup' %}">регистрация</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'login' %}">войти</a>
-            </li>
+           
+            {% if user.is_authenticated %}
             <li class="nav-item">
               <a class="nav-link" href="#">профиль</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'logout' %}">выйти</a>
             </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'signup' %}">регистрация</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}">войти</a>
+            </li>
+            {% endif %}
+            
             <hr>
             
           <form class="d-flex">

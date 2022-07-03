@@ -22,7 +22,7 @@ class Book(models.Model):
     file = models.FileField('файл книги', upload_to='file/')
     photo = models.ImageField('фотография', upload_to='photo/')
     description = models.TextField('описание', blank=True, null=True)
-    category = models.ForeignKey(Categories, on_delete=models.CASCADE)
+    category = models.ForeignKey(Categories, on_delete=models.CASCADE, blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     users = models.ManyToManyField(User, related_name='books')
     class Meta:

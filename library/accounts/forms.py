@@ -1,3 +1,4 @@
+
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .models import User
@@ -6,7 +7,7 @@ class CustomUserCreationForm(UserCreationForm):
     class Meta:
         fields = ('username', 'password1', 'password2', 'email', 'city', 'birthday', 'status')
         model = User
-    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control',
+    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control ',
                                                              'placeholder': 'логин'}))
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control',
                                                              'placeholder': 'пароль'}))
@@ -14,16 +15,16 @@ class CustomUserCreationForm(UserCreationForm):
     password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control',
                                                              'placeholder': 'пароль еще раз'}))
     
-    email = forms.EmailField(required=False, widget=forms.EmailInput(attrs={'class': 'form-control',
+    email = forms.EmailField(required=False, widget=forms.EmailInput(attrs={'class': 'form-control form-control-sm',
                                                              'placeholder': 'email'}))
     
-    city = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control',
+    city = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control form-control-sm',
                                                              'placeholder': 'город'}))
     
-    birthday = forms.DateField(required=False, widget=forms.DateInput(attrs={'class': 'form-control',
-                                                             'placeholder': 'день рождения'}))
+    birthday = forms.DateField(required=False, widget=forms.DateInput(attrs={'class': 'form-control form-control-sm',
+                                                             'placeholder': 'дата рождения'}))
     
-    status = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control',
+    status = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control form-control-sm',
                                                              'placeholder': 'статус'}))
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -31,5 +32,7 @@ class CustomUserCreationForm(UserCreationForm):
 
 
 class CustomAuthenticationForm(AuthenticationForm, forms.Form):
-    username = forms.CharField()
-    password = forms.PasswordInput()
+    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control',
+                                                             'placeholder': 'логин'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control',
+                                                                 'placeholder': 'пароль'}))

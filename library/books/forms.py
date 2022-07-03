@@ -9,6 +9,6 @@ class BookCreateForm(forms.ModelForm):
         fields = ('name', 'author', 'description', 'category', 'file', 'photo')
     name = forms.CharField()
     author = forms.CharField()
-    description = forms.Textarea()
+    description = forms.CharField(widget=forms.Textarea(), required=False)
     file = forms.FileField()
     photo = forms.ImageField()

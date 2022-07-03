@@ -1,20 +1,57 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<style>
+.errorlist li {
+    list-style-type: none;
+}
+</style>
+{% endblock head %}
+
 
 {% block content %}
 <div style='margin-top: 100px;'  ></div>
 <form action="{% url 'signup' %}" method="post">
     {% csrf_token %}
-    <div class="container bg-secondary" style='max-width: 500px;'>
-        {% for field in form %}
-        <div style='height: 10px;'></div>
-        {{field}}
-        <br>
+    <div class="container" style='max-width: 500px;'>
+
+        <h4 class="text-center">Регистрация</h4>
+        <hr>
         
-        {% endfor %}
+        <div style='height: 80px;'>
+            {{form.username}}
+            {{form.username.errors}}
+        </div>
+        
+        <div style='height: 80px;'>
+            {{form.password1}}
+            {{form.password1.errors}}
+        </div>
+        
+        <div style='height: 80px;'>
+            {{form.password2}}
+            {{form.password2.errors}}
+        </div>
+        
+   
+
+        <hr>
+        <h6 class="text-center">Необязательные поля</h6>
+        {{form.email}}
+        <div style='height: 10px;'></div>
+        {{form.city}}
+        <div style='height: 10px;'></div>
+        {{form.birthday}}
+        <div style='height: 10px;'></div>
+        {{form.status}}
+        <div style='height: 10px;'></div>
+        <div class="text-center">
+        <button type="submit" class="btn btn-success">Зарегестрироваться</button>
+        </div>
+        
+
     </div>
 
-    <button type="submit">send</button>
-    {{form.errors}}
 </form>
 
 {% endblock content %}
