@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView, CreateView, ListView, View
+from django.views.generic import TemplateView, CreateView, ListView, View, DetailView
 from .forms import BookCreateForm, CategoriesCreateForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Book, Categories
@@ -52,4 +52,8 @@ class CategoriesView(View):
             form.save()
             return redirect('categories')
 
-
+class BookDetailView(DetailView):
+    model = Book
+    template_name = "book.html"
+    context_object_name = 'book'
+    
