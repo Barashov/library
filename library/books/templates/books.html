@@ -2,17 +2,26 @@
 
 
 
+
 {% block content %}
 
 {% for book in books %}
-{{book.file}}
-<a href="/media/{{book.file}}">book</a>
-{% if not_my_books %}
-<button type="button" class="btn btn-outline-secondary" onclick="document.location.href='{% url 'addbook' book.pk%}'">Добавить в мои книги</button>
-{% endif %}
-{{book.name}}
-<br>
+<div class="card mb-3">
+  <div class="card" style="width: 18rem;">
+    <img src="{{book.photo.url}}" class="card-img-top" alt="">
+    <div class="card-body">
+      <h5 class="card-title">{{book.name}}</h5>
+      <p class="card-text">{{book.description}}</p>
+      <a href="#" class="btn btn-primary">открыть</a>
+      {% if not_my_books %}
+      <button type="button" class="btn btn-outline-secondary" onclick="document.location.href='{% url 'addbook' book.pk%}'">Добавить в мои книги</button>
+      {% endif %}
+    </div>
+  </div>
+  <div style='margin-top: 15px;'
+
 {% endfor %}
+
 
 
 {% endblock content %}

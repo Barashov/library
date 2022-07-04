@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<form action="{% url 'categories' %}" method="post">
+{% csrf_token %}
+{{form}}
+<button type="submit">send</button>
+
+
+</form>
+
+
+{% for category in categories %}
+{{category.name}}
+{% endfor %}
+
+
+{% endblock content %}
+
+
+

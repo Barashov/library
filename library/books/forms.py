@@ -1,6 +1,7 @@
+from dataclasses import fields
 from django import forms
 
-from .models import Book
+from .models import Book, Categories
 
 
 class BookCreateForm(forms.ModelForm):
@@ -12,3 +13,9 @@ class BookCreateForm(forms.ModelForm):
     description = forms.CharField(widget=forms.Textarea(), required=False)
     file = forms.FileField()
     photo = forms.ImageField()
+    
+class CategoriesCreateForm(forms.ModelForm):
+    class Meta:
+        model = Categories
+        fields = ('name',)
+    name = forms.CharField()
