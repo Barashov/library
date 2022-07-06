@@ -1,11 +1,15 @@
 {% extends 'base.html' %}
+{% block head %}
 
+
+{% endblock head %}
 
 
 
 {% block content %}
 
 {% for book in books %}
+
 <div class="card mb-3">
   <div class="card" style="width: 18rem;">
     <img src="{{book.photo.url}}" class="card-img-top" alt="">
@@ -19,7 +23,6 @@
     </div>
   </div>
   <div style='margin-top: 15px;'
-
 {% endfor %}
 
 

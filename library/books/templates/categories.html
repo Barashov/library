@@ -1,20 +1,42 @@
 {% extends 'base.html' %}
+{% block head %}
+<style>
 
+    .category {
+        background-color: #695b86;
+        border-radius: 5px;
+        height: 40px;
+        width: 260px;
+        border: 1px solid aliceblue;
+        margin: 20px;
+    }
+</style>
+{% endblock head %}
 
 {% block content %}
 
 <form action="{% url 'categories' %}" method="post">
 {% csrf_token %}
-{{form}}
-<button type="submit">send</button>
+<div class="input-group mb-3">
+    {{form.name}}
+    <div class="input-group-append">
+      <button class="btn btn-outline-secondary" type="submit">создать</button>
+    </div>
+  </div>
+  
 
 
 </form>
+        <div class="container text-center">
+            {% for category in categories %}
+        <div class="category text-center text-light">{{category}}</div>
+        {% endfor %}
+        </div>
+        
+        
 
 
-{% for category in categories %}
-{{category.name}}
-{% endfor %}
+
 
 
 {% endblock content %}
