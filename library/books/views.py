@@ -1,6 +1,7 @@
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView, View, DetailView
+from django.views.generic import *
 from .forms import BookCreateForm, CategoriesCreateForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Book, Categories
@@ -73,7 +74,8 @@ class  BooksCreatedByUserListView(LoginRequiredMixin, ListView):
     model = Book
     template_name = "books.html"
     context_object_name = 'books'
-    extra_context = {'page': 'Мною созданные книги'}
+    extra_context = {'page': 'Мною созданные книги',
+                     'is_author': True}
     
     def get_queryset(self):
         user_books = Book.objects.filter(user=self.request.user)
@@ -90,5 +92,18 @@ class GetCategoryView(View):
         category = Categories.objects.get(pk=pk)
         books = Book.objects.filter(category=category)
         return render(request, 'books.html', {'books': books, 'page': category.name})
+ 
+class BookUpdateView(UpdateView):
+    model = Book
+    template_name = "bookcreate.html"
+    form_class = BookCreateForm
     
+    def dispatch(self, request, pk):
+        user = request.user
+        author = Book.objects.get(pk=pk)
+        if author.user == user:
+            return super().dispatch(request)
+        else:
+            return HttpResponse('Нельзя менять чужие книги!!!')
+   
     

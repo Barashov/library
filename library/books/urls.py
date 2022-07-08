@@ -10,7 +10,8 @@ urlpatterns = [
     path('category/<pk>/', GetCategoryView.as_view(), name='category' ),
     path('book/<pk>/', BookDetailView.as_view(), name='book'),
     path('popular-books', PopularBookListView.as_view(), name='popular_books'),
-    path('my_books/', BooksCreatedByUserListView.as_view(), name='my_books')
+    path('my_books/', BooksCreatedByUserListView.as_view(), name='my_books'),
+    path('update-book/<pk>/', BookUpdateView.as_view(), name='book_update'),
     
     
     

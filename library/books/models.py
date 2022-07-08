@@ -36,5 +36,9 @@ class Book(models.Model):
         return self.name
     
     
+class Comments(models.Model):
+    text = models.TextField('комментарий')
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     
         
