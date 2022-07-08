@@ -6,15 +6,17 @@ from accounts.models import User
 
 
 class Categories(models.Model):
-
     name = models.CharField('категория',max_length=20)
-
     class Meta:
         verbose_name = 'категория'
         verbose_name_plural = 'категории'
         
     def __str__(self):
         return self.name
+    
+    def get_absolute_url(self):
+        return reverse("category", kwargs={"pk": self.pk})
+    
 
 class Book(models.Model):
     name = models.CharField('название',max_length=30)

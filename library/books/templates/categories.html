@@ -29,7 +29,7 @@
 </form>
         <div class="container text-center">
             {% for category in categories %}
-        <div class="category text-center text-light">{{category}}</div>
+        <div class="category text-center text-light" onclick="document.location.href='{% url 'category' category.pk %}'">{{category}}</div>
         {% endfor %}
         </div>
         

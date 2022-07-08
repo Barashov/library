@@ -4,6 +4,7 @@
 <form action="{% url 'bookcreate' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <div class='container'>
+    <h2 class='text-center'>Создать книгу</h2>
     {{form.name}}
     <div style='margin-top: 10px;'></div>
     {{form.author}}

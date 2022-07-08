@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
-    <title>Document</title>
+    <title>Library</title>
     {% block head %}{% endblock head %}
 </head>
 <body>
@@ -33,7 +33,7 @@
               <a class="nav-link" href="{% url 'books' %}">все книги</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">новинки</a>
+              <a class="nav-link" href="{% url 'popular_books' %}">популярные книги</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'categories' %}">категории</a>
@@ -42,13 +42,16 @@
               <a class="nav-link" href="{% url 'userbooks' %}">мои книги</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="{% url 'my_books' %}">мною созданные книги</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="{% url 'bookcreate' %}">создать книгу</a>
             </li>
             <hr>
            
             {% if user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link" href="#">профиль</a>
+              <a class="nav-link" href="{% url 'my_profile' %}">профиль</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'logout' %}">выйти</a>

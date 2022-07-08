@@ -1,5 +1,6 @@
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
+from django.views import View
 from .models import User
 from django.views.generic import CreateView
 from .forms import CustomUserCreationForm, CustomAuthenticationForm
@@ -20,3 +21,7 @@ class UserCreateView(CreateView):
 class UserLoginView(LoginView):
     form_class = CustomAuthenticationForm
     template_name = 'login.html'
+    
+class ProfileView(View):
+    def get(self, request):
+        return render(request, 'profile.html', {'profile': request.user})

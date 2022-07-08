@@ -1,8 +1,25 @@
 {% extends 'base.html' %}
+{% block head %}
+<style>
 
+
+    .container {
+        background-color: rgb(246, 244, 241);
+        max-width: 600px;
+        min-width: 300px;
+    }
+</style>
+{% endblock head %}
 
 {% block content %}
-{{book.name}}
-<iframe src="{{book.file.url}}" frameborder="4"></iframe>
+<div class='container text-center'>
+    <img src="{{book.photo.url}}" alt="" class="card-img-top">
+<h3>{{book.name}}</h3>
+<p>{{book.description}}</p>
+<p>Автор: {{book.author}}</p>
+<p>Категория: {{book.category.name}}</p>
+<p>Создатель: {{book.user.username}}</p>
+<p><a href="{{book.file.url}}">открыть</a></p>
+</div>
 
 {% endblock content %}
