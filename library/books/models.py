@@ -22,11 +22,13 @@ class Book(models.Model):
     name = models.CharField('название',max_length=30)
     author = models.CharField('автор',max_length=30)
     file = models.FileField('файл книги', upload_to='file/')
-    photo = models.ImageField('фотография', upload_to='photo/')
+    is_private = models.BooleanField('приватность')
+    photo = models.ImageField('фотография', upload_to='photo/', default='photo.png')
     description = models.TextField('описание', blank=True, null=True)
     category = models.ForeignKey(Categories, on_delete=models.CASCADE, blank=True, null=True, verbose_name='категория')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     users = models.ManyToManyField(User, related_name='books')
+    
     class Meta:
         verbose_name = 'книга'
         verbose_name_plural = 'книги'

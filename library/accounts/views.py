@@ -18,6 +18,8 @@ class UserCreateView(CreateView):
         user = authenticate(username=username, password=password)
         login(self.request, user)
         return redirect(self.success_url)
+    
+    
 class UserLoginView(LoginView):
     form_class = CustomAuthenticationForm
     template_name = 'login.html'

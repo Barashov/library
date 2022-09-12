@@ -12,6 +12,8 @@ from django.db.models import Count
 
 
 class BooksCreateView(LoginRequiredMixin, CreateView):
+    """создание книги"""
+    
     model = Book
     template_name = "bookcreate.html"
     form_class = BookCreateForm
@@ -23,12 +25,16 @@ class BooksCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
     
 class BooksListView(ListView):
+    """показ все не приватных книг"""
+    
     model = Book
     template_name = "books.html"
     context_object_name = 'books'
     extra_context = {'not_my_books': True, 'page': 'Все книги'}
 
 class UserBooks(LoginRequiredMixin, View):
+    """показ книг пользователя"""
+    
     login_url = reverse_lazy('signup')
     def get(self, request):
         books = Book.objects.filter(users=request.user)
@@ -36,19 +42,23 @@ class UserBooks(LoginRequiredMixin, View):
                                               'page': 'Мои книги'})
     
 class AddBookView(LoginRequiredMixin, View):
+    """добавление книги в 'мои книги'"""
+    
     login_url = reverse_lazy('signup')
     def get(self, request, pk):
         UserLogic.add_book_to_user(pk=pk, request=request)
         return redirect('books')
     
 class CategoriesView(View):
+    """страница с категориями"""
+    
     def get(self, request):
         categories = Categories.objects.all()
         form = CategoriesCreateForm()
         return render(request, 'categories.html', {'categories': categories, 
                                                    'form': form,
                                                    'page': 'Категории'})
-    
+        
     def post(self, request):
         form = CategoriesCreateForm(request.POST)
         if form.is_valid():
@@ -56,11 +66,14 @@ class CategoriesView(View):
             return redirect('categories')
 
 class BookDetailView(DetailView):
+    """информация об одной книге"""
     model = Book
     template_name = "book.html"
     context_object_name = 'book'
     
 class PopularBookListView(ListView):
+    """показ самых добавляемых книг"""
+    
     model = Book
     template_name = "books.html"
     context_object_name = 'books'
@@ -74,7 +87,7 @@ class  BooksCreatedByUserListView(LoginRequiredMixin, ListView):
     model = Book
     template_name = "books.html"
     context_object_name = 'books'
-    extra_context = {'page': 'Мною созданные книги',
+    extra_context = {'page': 'созданные книги',
                      'is_author': True}
     
     def get_queryset(self):
@@ -95,7 +108,7 @@ class GetCategoryView(View):
  
 class BookUpdateView(UpdateView):
     model = Book
-    template_name = "bookcreate.html"
+    template_name = "bookupdate.html"
     form_class = BookCreateForm
     
     def dispatch(self, request, pk):

@@ -12,7 +12,10 @@
 
 <div class="card mb-3">
   <div class="card" style="width: 18rem;">
+    
     <img src="{{book.photo.url}}" class="card-img-top" alt="">
+    
+    
     <div class="card-body">
       <h5 class="card-title">{{book.name}}</h5>
       <p class="card-text">{{book.description}}</p>
@@ -21,8 +24,9 @@
       <button type="button" class="btn btn-outline-secondary" onclick="document.location.href='{% url 'addbook' book.pk%}'">Добавить в мои книги</button>
       {% endif %}
       {% if is_author %}
-     <button type="button" class="btn btn-success" onclick="document.location.href='{% url 'book_update' book.pk %}'" >изменить</button>
-     {% endif %}
+      author
+      {% endif %}
+
     </div>
   </div>
   <div style='margin-top: 15px;'
