@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import *
-from .forms import BookCreateForm, CategoriesCreateForm
+from .forms import *
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Book, Categories
 from .logics import UserLogic
@@ -25,7 +25,7 @@ class BooksCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
     
 class BooksListView(ListView):
-    """показ все не приватных книг"""
+    """показ всех не приватных книг"""
     
     model = Book
     template_name = "books.html"
@@ -84,6 +84,7 @@ class PopularBookListView(ListView):
 
     
 class  BooksCreatedByUserListView(LoginRequiredMixin, ListView):
+    """книги, созданные пользователем"""
     model = Book
     template_name = "books.html"
     context_object_name = 'books'
@@ -95,21 +96,18 @@ class  BooksCreatedByUserListView(LoginRequiredMixin, ListView):
         return user_books
 
 
-class CategoriesListView(ListView):
-    model = Categories
-    template_name = "books.html"
-    context_object_name = 'books'
-    
 class GetCategoryView(View):
+    """получить все книги по категории"""
     def get(self, request, pk):
         category = Categories.objects.get(pk=pk)
         books = Book.objects.filter(category=category)
         return render(request, 'books.html', {'books': books, 'page': category.name})
  
 class BookUpdateView(UpdateView):
+    """обновление книги"""
     model = Book
     template_name = "bookupdate.html"
-    form_class = BookCreateForm
+    form_class = BookUpdateForm
     
     def dispatch(self, request, pk):
         user = request.user
@@ -119,4 +117,13 @@ class BookUpdateView(UpdateView):
         else:
             return HttpResponse('Нельзя менять чужие книги!!!')
    
+class FileUpdateView(UpdateView):
+    model = Book
+    template_name = 'file.html'
+    form_class = FileUpdateForm
+    
+class PhotoUpdateView(UpdateView):
+    model = Book
+    template_name = 'file.html'
+    form_class = PhotoUpdateForm
     

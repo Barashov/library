@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<div style="margin-top: 100px"></div>
+<div class='container'>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form}}
+        <button class='btn btn-success' type="submit">создать</button>
+    </form>
+   
+</div>
+
+
+{% endblock head %}

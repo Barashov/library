@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<form action="{% url 'bookcreate' %}" method="post">
+<form method="post">
     {% csrf_token %}
     <div class='container'>
     <h2 class='text-center'>Создать книгу</h2>
@@ -14,13 +14,12 @@
     {{form.category.label_tag}}
     {{form.category}}
     <div style='margin-top: 10px;'></div>
-    {{form.file.label_tag}}
-    {{form.file}}
-    <div style='margin-top: 10px;'></div>
-    {{form.photo.label_tag}}
-    {{form.photo}}
+    {{form.is_private.label_tag}}
     {{form.is_private}}
     <div style='margin-top: 10px;'></div>
+    <a href="{% url 'update_file' form.instance.pk %}">изменить файл</a>
+    <a href="{% url 'update_photo' form.instance.pk %}">изменить фото</a>
+
    <div class='text-center'>
     <button class='btn btn-success' type="submit">создать</button>
    </div>    

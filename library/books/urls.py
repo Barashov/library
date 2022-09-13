@@ -12,6 +12,9 @@ urlpatterns = [
     path('popular-books', PopularBookListView.as_view(), name='popular_books'),
     path('my_books/', BooksCreatedByUserListView.as_view(), name='my_books'),
     path('update-book/<pk>/', BookUpdateView.as_view(), name='book_update'),
+    path('update-file/<pk>/', FileUpdateView.as_view(), name='update_file'),
+    path('update-photo/<pk>/', PhotoUpdateView.as_view(), name='update_photo')
+    
     
     
     
