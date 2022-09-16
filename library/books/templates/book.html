@@ -18,9 +18,14 @@
     {% endif %}
     
 <h3>{{book.name}}</h3>
+{% if book.description %}
 <p>{{book.description}}</p>
+{% endif %}
 <p>Автор: {{book.author}}</p>
+{% if book.category.name %}
 <p>Категория: {{book.category.name}}</p>
+{% endif %}
+
 <p>Создатель: {{book.user.username}}</p>
 <p><a href="{{book.file.url}}">открыть</a></p>
 

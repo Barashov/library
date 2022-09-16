@@ -4,21 +4,27 @@ from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
 
-from ninja import NinjaAPI
+from ninja import NinjaAPI, Router
 
+router = Router()
+
+@router.get('/b')
+def hello(request):
+    return "b"
+
+@router.get('/a')
+def helo(request):
+    return "a"
 
 api = NinjaAPI()
-@api.get('/hello')
-def hello(request):
-    return "hello"
-
+api.add_router('ab/', router)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('books.urls')),
     path('accounts/', include('accounts.urls')),
     path('__debug__/', include('debug_toolbar.urls')),
-    path('api/v1/', api.urls),
+    path('api/v1/', api.urls),     #api
 
 ]
 if settings.DEBUG:

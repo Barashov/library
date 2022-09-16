@@ -17,7 +17,7 @@ class BookCreateForm(forms.ModelForm):
     file = forms.FileField(label='файл книги' ,widget=forms.FileInput(attrs={'class': 'form-control'}))
     photo = forms.ImageField(label='фото', required=False, widget=forms.FileInput(attrs={'class': 'form-control'}))
     category = forms.Select(attrs={'class': 'form-control'})
-    is_private = forms.BooleanField(required=False)
+    is_private = forms.BooleanField(required=False, label='приватная')
 
 class BookUpdateForm(forms.ModelForm):
     class Meta:

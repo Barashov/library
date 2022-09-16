@@ -8,6 +8,7 @@
 
 {% block content %}
 <h2 class='text-center'>{{page}}</h2>
+<div class="card-deck">
 {% for book in books %}
 
 <div class="card mb-3">
@@ -24,14 +25,15 @@
       <button type="button" class="btn btn-outline-secondary" onclick="document.location.href='{% url 'addbook' book.pk%}'">Добавить в мои книги</button>
       {% endif %}
       {% if is_author %}
-      author
+      <button type="button" class="btn btn-primary" onclick="document.location.href='{% url 'book_update' book.pk %}'">изменить</button>
       {% endif %}
 
     </div>
   </div>
-  <div style='margin-top: 15px;'
+  <div style='margin-top: 15px;'></div>
 {% endfor %}
 
+</div>
 
 
 {% endblock content %}

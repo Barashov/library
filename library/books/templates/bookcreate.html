@@ -5,20 +5,25 @@
     {% csrf_token %}
     <div class='container'>
     <h2 class='text-center'>Создать книгу</h2>
+    <div style='margin-top: 15px;'></div>
     {{form.name}}
-    <div style='margin-top: 10px;'></div>
+    <div style='margin-top: 15px;'></div>
     {{form.author}}
+    <div style='margin-top: 15px;'></div>
+    {{form.file.label_tag}}
+    {{form.file}}
+    <div style='margin-top: 25px;'></div>
+        <hr>
+        <h6 class="text-center">Необязательные поля</h6>
     <div style='margin-top: 10px;'></div>
     {{form.description}}
     <div style='margin-top: 10px;'></div>
     {{form.category.label_tag}}
     {{form.category}}
     <div style='margin-top: 10px;'></div>
-    {{form.file.label_tag}}
-    {{form.file}}
-    <div style='margin-top: 10px;'></div>
     {{form.photo.label_tag}}
     {{form.photo}}
+    {{form.is_private.label_tag}}
     {{form.is_private}}
     <div style='margin-top: 10px;'></div>
    <div class='text-center'>

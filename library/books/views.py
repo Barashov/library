@@ -32,6 +32,9 @@ class BooksListView(ListView):
     context_object_name = 'books'
     extra_context = {'not_my_books': True, 'page': 'Все книги'}
 
+    def get_queryset(self):
+        return Book.objects.filter(is_private=False)
+
 class UserBooks(LoginRequiredMixin, View):
     """показ книг пользователя"""
     
