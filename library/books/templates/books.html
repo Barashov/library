@@ -7,32 +7,37 @@
 
 
 {% block content %}
-<h2 class='text-center'>{{page}}</h2>
-<div class="card-deck">
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
 {% for book in books %}
 
-<div class="card mb-3">
-  <div class="card" style="width: 18rem;">
-    
-    <img src="{{book.photo.url}}" class="card-img-top" alt="">
-    
-    
-    <div class="card-body">
-      <h5 class="card-title">{{book.name}}</h5>
-      <p class="card-text">{{book.description}}</p>
-      <a href="{% url 'book' book.pk %}" class="btn btn-primary">открыть</a>
-      {% if not_my_books %}
-      <button type="button" class="btn btn-outline-secondary" onclick="document.location.href='{% url 'addbook' book.pk%}'">Добавить в мои книги</button>
-      {% endif %}
-      {% if is_author %}
-      <button type="button" class="btn btn-primary" onclick="document.location.href='{% url 'book_update' book.pk %}'">изменить</button>
-      {% endif %}
+  <div class="col">
+    <div class="card h-100">
+      <img src="{{book.photo.url}}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">{{book.name}}</h5>
+        <p class="card-text">Автор: {{book.author}}</p>
+        <p class="card-text">{{book.description}}</p>
+        
+      </div>
+      <div class="card-footer">
+        <a href="{% url 'book' book.pk %}" class="btn btn-primary">открыть</a>
+        {% if not_my_books %}
+        <button type="button" class="btn btn-outline-secondary" onclick="document.location.href='{% url 'addbook' book.pk%}'">Добавить в мои книги</button>
+        {% endif %}
+        {% if is_author %}
+        <button type="button" class="btn btn-primary" onclick="document.location.href='{% url 'book_update' book.pk %}'">изменить</button>
+        {% endif %}
+
+      </div>
 
     </div>
   </div>
-  <div style='margin-top: 15px;'></div>
-{% endfor %}
+  
 
+
+
+  {% endfor %}
 </div>
 
 

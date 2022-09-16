@@ -12,7 +12,7 @@ class BookCreateForm(forms.ModelForm):
                                                          'placeholder': 'название книги'}))
     author = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control',
                                                            'placeholder': 'автор'}))
-    description = forms.CharField(required=False, widget=forms.Textarea(attrs={'class': 'form-control',
+    description = forms.CharField(max_length=100 ,required=False, widget=forms.Textarea(attrs={'class': 'form-control',
                                                                                'placeholder': 'описание'}))
     file = forms.FileField(label='файл книги' ,widget=forms.FileInput(attrs={'class': 'form-control'}))
     photo = forms.ImageField(label='фото', required=False, widget=forms.FileInput(attrs={'class': 'form-control'}))
@@ -27,7 +27,7 @@ class BookUpdateForm(forms.ModelForm):
                                                          'placeholder': 'название книги'}))
     author = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control',
                                                            'placeholder': 'автор'}))
-    description = forms.CharField(required=False, widget=forms.Textarea(attrs={'class': 'form-control',
+    description = forms.CharField(max_length=100 ,required=False, widget=forms.Textarea(attrs={'class': 'form-control',
                                                                                'placeholder': 'описание'}))
     category = forms.Select(attrs={'class': 'form-control'})
     is_private = forms.BooleanField(required=False, label="приватная")
