@@ -10,20 +10,28 @@ from django.db.models import Count
 
 
 
-
-class BooksCreateView(LoginRequiredMixin, CreateView):
+class BookCreateView(LoginRequiredMixin, View):
     """создание книги"""
-    
-    model = Book
-    template_name = "bookcreate.html"
-    form_class = BookCreateForm
-    success_url = reverse_lazy('home')
-    
-    
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super().form_valid(form)
-    
+    login_url = reverse_lazy('signup')
+
+    def get(self, request):
+        form = BookCreateForm(request.GET)
+        return render(request, "bookcreate.html", {'form': form})
+
+    def post(self, request):
+        form = BookCreateForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            form.instance.user = request.user
+            book_form = form.save()
+            UserLogic.add_book_to_user(pk=book_form.pk, request=request)
+            return redirect("home")
+        else:
+            form = BookCreateForm()
+            return render(request, "bookcreate.html", {'form': form})
+
+
+
 class BooksListView(ListView):
     """показ всех не приватных книг"""
     
