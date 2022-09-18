@@ -137,4 +137,10 @@ class PhotoUpdateView(UpdateView):
     model = Book
     template_name = 'file.html'
     form_class = PhotoUpdateForm
+
+class SearchView(View):
+    def get(self, request):
+        book_name = request.GET.get('q')
+        books = Book.objects.filter(name__icontains=book_name)
+        return render(request, 'books.html', {'books': books, 'page': f'поиск по "{book_name}"'})
     

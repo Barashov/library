@@ -65,8 +65,8 @@
             
             <hr>
             
-          <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="найти книгу" aria-label="Search">
+          <form action="{% url 'search' %}" method="get" class="d-flex">
+            <input class="form-control me-2" type="text" placeholder="найти книгу" aria-label="Search" id="q" name="q">
             <button class="btn btn-outline-success" type="submit">поиск</button>
           </form>
         </div>

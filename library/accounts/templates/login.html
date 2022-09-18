@@ -14,6 +14,7 @@
     {% if form.errors %}
     <p>Пожалуйста, введите правильные имя пользователя и пароль. Оба поля могут быть чувствительны к регистру.</p>
     {% endif %}
+     <a href="{% url 'signup' %}" class="link-secondary text-center">нет аккаунта?</a>
     <div class="text-center">
         <button type="submit" class="btn btn-success">Войти</button>
         </div>
