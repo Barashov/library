@@ -27,6 +27,7 @@
 {% endif %}
 
 <p>Создатель: {{book.user.username}}</p>
+<a href="{% url 'comments' book.pk %}" class="link-secondary text-center">комментарии</a>
 <p><a href="{{book.file.url}}">открыть</a></p>
 
 </div>

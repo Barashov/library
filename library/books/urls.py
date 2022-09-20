@@ -14,7 +14,8 @@ urlpatterns = [
     path('update-book/<pk>/', BookUpdateView.as_view(), name='book_update'),
     path('update-file/<pk>/', FileUpdateView.as_view(), name='update_file'),
     path('update-photo/<pk>/', PhotoUpdateView.as_view(), name='update_photo'),
-    path('search/', SearchView.as_view(), name='search')
+    path('search/', SearchView.as_view(), name='search'),
+    path('comments/<pk>/', CommentsView.as_view(), name='comments'),
     
     
     

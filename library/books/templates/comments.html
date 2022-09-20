@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block head %}
+
+{% endblock head %}
+
+{% block content %}
+
+<form method="post">
+{% csrf_token %}
+{{form}}
+<button type="submit">send</button>
+</form>
+
+{% for comment in comments %}
+{{comment.text}}
+{{comment.user}}
+
+{% endfor %}
+
+
+
+
+{% endblock content %}

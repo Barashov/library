@@ -1,10 +1,10 @@
 from django.http import HttpResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import *
 from .forms import *
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Book, Categories
+from .models import Book, Categories, Comments
 from .logics import UserLogic
 from django.db.models import Count
 
@@ -90,7 +90,7 @@ class PopularBookListView(ListView):
     context_object_name = 'books'
     extra_context = {'page': 'Популярные книги'}
     def get_queryset(self):
-        popular_books = Book.objects.annotate(num_books=Count('users')).order_by('-num_books').only('pk', 'name', 'description', 'photo')
+        popular_books = Book.objects.annotate(num_books=Count('users')).order_by('-num_books')
         return popular_books 
 
     
@@ -129,18 +129,39 @@ class BookUpdateView(UpdateView):
             return HttpResponse('Нельзя менять чужие книги!!!')
    
 class FileUpdateView(UpdateView):
+    """обновление файла"""
     model = Book
     template_name = 'file.html'
     form_class = FileUpdateForm
     
 class PhotoUpdateView(UpdateView):
+    """обновление фото"""
     model = Book
     template_name = 'file.html'
     form_class = PhotoUpdateForm
 
 class SearchView(View):
+    """поиск"""
     def get(self, request):
         book_name = request.GET.get('q')
         books = Book.objects.filter(name__icontains=book_name)
         return render(request, 'books.html', {'books': books, 'page': f'поиск по "{book_name}"'})
     
+class CommentsView(View):
+    def get(self, request, pk):
+        book = Book.objects.get(pk=pk)
+        comments = Comments.objects.select_related('user').filter(book=book)
+        form = CommentCreateForm(request.GET)
+        return render(request, 'comments.html', {'form': form,
+                                                 'comments': comments})
+    def post(self, request, pk):
+        form = CommentCreateForm(request.POST)
+        if form.is_valid():
+            user = request.user
+            book = Book.objects.get(pk=pk)
+            form.instance.user = user
+            form.instance.book = book
+            form.save()
+            return redirect('comments', pk=pk)
+        else:
+            return redirect('comments', pk=pk)
