@@ -6,11 +6,13 @@ from django.views.generic import CreateView
 from .forms import CustomUserCreationForm, CustomAuthenticationForm
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import login, authenticate
+
 class UserCreateView(CreateView):
     model = User
     template_name = "signup.html"
     form_class = CustomUserCreationForm
     success_url = reverse_lazy('home')
+
     def form_valid(self, form):
         form.save()
         username = self.request.POST['username']
@@ -24,6 +26,16 @@ class UserLoginView(LoginView):
     form_class = CustomAuthenticationForm
     template_name = 'login.html'
     
-class ProfileView(View):
+class UserProfileView(View):
     def get(self, request):
         return render(request, 'profile.html', {'profile': request.user})
+
+class ProfileView(View):
+    def get(self, request, pk):
+        user = User.objects.get(pk=pk)
+        return render(request, 'profile.html', {'profile': user})
+
+class ProfileByPkView(View):
+    def get(self, request, pk):
+        user = User.objects.get(pk=pk)
+        return render(request, 'profile.html', {'profile': user})

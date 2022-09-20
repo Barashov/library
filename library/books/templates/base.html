@@ -49,6 +49,12 @@
            
             {% if user.is_authenticated %}
             <li class="nav-item">
+              <a class="nav-link" href="{% url 'my_books' %}">созданные книги</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'private_books' %}">приватные книги</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="{% url 'my_profile' %}">профиль</a>
             </li>
             <li class="nav-item">

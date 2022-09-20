@@ -76,12 +76,14 @@ class CategoriesView(View):
             form.save()
             return redirect('categories')
 
-class BookDetailView(DetailView):
-    """информация об одной книге"""
-    model = Book
-    template_name = "book.html"
-    context_object_name = 'book'
-    
+class BookDetailView(View):
+    def get(self, request, pk):
+        book = Book.objects.prefetch_related('user').get(pk=pk)
+        return render(request, 'book.html', {'book': book})
+
+
+
+
 class PopularBookListView(ListView):
     """показ самых добавляемых книг"""
     
@@ -122,8 +124,8 @@ class BookUpdateView(UpdateView):
     
     def dispatch(self, request, pk):
         user = request.user
-        author = Book.objects.get(pk=pk)
-        if author.user == user:
+        book = Book.objects.prefetch_related('user').get(pk=pk)
+        if book.user == user:
             return super().dispatch(request)
         else:
             return HttpResponse('Нельзя менять чужие книги!!!')
@@ -149,8 +151,8 @@ class SearchView(View):
     
 class CommentsView(View):
     def get(self, request, pk):
-        book = Book.objects.get(pk=pk)
-        comments = Comments.objects.select_related('user').filter(book=book)
+
+        comments = Comments.objects.select_related('user').filter(book=pk)
         form = CommentCreateForm(request.GET)
         return render(request, 'comments.html', {'form': form,
                                                  'comments': comments})
@@ -165,3 +167,11 @@ class CommentsView(View):
             return redirect('comments', pk=pk)
         else:
             return redirect('comments', pk=pk)
+
+class PrivateBooksView(View):
+    def get(self, request):
+        books = Book.objects.filter(users=request.user, is_private=True)
+        return render(request, "books.html", {'books': books,
+                                              'page': 'приватные книги'})
+
+

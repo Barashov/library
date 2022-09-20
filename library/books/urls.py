@@ -16,6 +16,7 @@ urlpatterns = [
     path('update-photo/<pk>/', PhotoUpdateView.as_view(), name='update_photo'),
     path('search/', SearchView.as_view(), name='search'),
     path('comments/<pk>/', CommentsView.as_view(), name='comments'),
+    path('private-books/', PrivateBooksView.as_view(), name='private_books')
     
     
     
