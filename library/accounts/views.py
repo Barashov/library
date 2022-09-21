@@ -28,14 +28,16 @@ class UserLoginView(LoginView):
     
 class UserProfileView(View):
     def get(self, request):
-        return render(request, 'profile.html', {'profile': request.user})
+        return render(request,
+                      'profile.html',
+                      {'profile': request.user,
+                       'is_request_user': True})
 
-class ProfileView(View):
-    def get(self, request, pk):
-        user = User.objects.get(pk=pk)
-        return render(request, 'profile.html', {'profile': user})
 
 class ProfileByPkView(View):
     def get(self, request, pk):
         user = User.objects.get(pk=pk)
-        return render(request, 'profile.html', {'profile': user})
+        return render(request,
+                      'profile.html',
+                      {'profile': user,
+                       'is_request_user': False})

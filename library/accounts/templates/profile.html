@@ -1,8 +1,39 @@
 {% extends 'base.html' %}
 
-{% block content %}
+{% block head %}
+<style>
 
-{{profile.username}}
-{{profile.city}}
-<a href="{% url 'my_books' %}">созданные книги</a>
+
+    .container {
+        background-color: rgb(246, 244, 241);
+        max-width: 600px;
+        min-width: 300px;
+    }
+</style>
+{% endblock head %}
+
+{% block content %}
+<div class="container">
+    <h3>{{profile.username}}</h3>
+    {% if profile.city %}
+    <p>город: {{profile.city}}</p>
+    {% endif %}
+    {% if profile.email %}
+    <p>email: {{profile.email}}</p>
+    {% endif %}
+    {% if profile.birthday %}
+    <p>день рождения: {{profile.birthday}}</p>
+    {% endif %}
+    {% if profile.status %}
+    <p>статус: {{profile.status}}</p>
+    {% endif %}
+    {% if is_request_user %}
+    <a href="{% url 'my_books' %}">созданные книги</a>
+    {% else %}
+    <a href="{% url 'books_by_user' profile.pk %}">созданные книги</a>
+    {% endif %}
+
+</div>
+
+
 {% endblock content %}

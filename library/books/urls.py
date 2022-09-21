@@ -5,6 +5,7 @@ urlpatterns = [
     path('book-create/', BookCreateView.as_view(), name='bookcreate'),
     path('books/', BooksListView.as_view(), name='books'),
     path('user-books/', UserBooks.as_view(), name='userbooks'),
+    path("user-books/<pk>", BooksByUser.as_view(), name="books_by_user"),
     path('add-book/<pk>/', AddBookView.as_view(), name='addbook'),
     path('categories', CategoriesView.as_view(), name='categories'),
     path('category/<pk>/', GetCategoryView.as_view(), name='category' ),

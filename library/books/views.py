@@ -174,4 +174,8 @@ class PrivateBooksView(View):
         return render(request, "books.html", {'books': books,
                                               'page': 'приватные книги'})
 
-
+class BooksByUser(View):
+    def get(self, request, pk):
+        books = Book.objects.filter(user=pk)
+        return render(request, "books.html", {'books': books, 
+                                              'page': 'книги пользователя'})

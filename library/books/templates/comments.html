@@ -7,13 +7,24 @@
 
 <form method="post">
 {% csrf_token %}
-{{form}}
-<button type="submit">send</button>
+<div class="input-group mb-3">
+    {{form.text}}
+    <div class="input-group-append">
+      <button class="btn btn-outline-secondary" type="submit">создать</button>
+    </div>
+  </div>
 </form>
 
 {% for comment in comments %}
-{{comment.text}}
-{{comment.user}}
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <p>{{comment.text}}</p>
+    
+    <a href="{% url 'profile' comment.user.pk %}" class="card-link">автор комментария: {{comment.user}}</a>
+    
+  </div>
+</div>
+
 
 {% endfor %}
 

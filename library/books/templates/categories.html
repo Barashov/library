@@ -1,16 +1,6 @@
 {% extends 'base.html' %}
 {% block head %}
-<style>
 
-    .category {
-        background-color: #695b86;
-        border-radius: 5px;
-        height: 40px;
-        width: 260px;
-        border: 1px solid aliceblue;
-        margin: 20px;
-    }
-</style>
 {% endblock head %}
 
 {% block content %}
@@ -27,9 +17,17 @@
 
 
 </form>
-        <div class="container text-center">
+        <div class="container">
             {% for category in categories %}
-        <div class="category text-center text-light" onclick="document.location.href='{% url 'category' category.pk %}'">{{category}}</div>
+            <div class="card" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title">{{category.name}}</h5>
+                
+                <a href="{% url 'category' category.pk %}" class="card-link">книги</a>
+                
+              </div>
+            </div>
+        
         {% endfor %}
         </div>
         

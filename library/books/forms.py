@@ -79,3 +79,5 @@ class CommentCreateForm(forms.ModelForm):
     class Meta:
         model = Comments
         fields = ('text',)
+    text = forms.CharField(label="добавить комментарий",
+                           widget=forms.TextInput(attrs={'class': 'form-control'}))

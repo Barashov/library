@@ -17,7 +17,7 @@ library/media/photo
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
-
+library/.idea
 # AWS User-specific
 .idea/**/aws.xml
 
